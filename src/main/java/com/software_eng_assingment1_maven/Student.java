@@ -1,4 +1,7 @@
 package com.software_eng_assingment1_maven;
+
+import java.util.ArrayList;
+
 /**
  * @author Aoife McDonagh, 13411348 <https://github.com/aoifemcdonagh>
  */
@@ -8,6 +11,8 @@ public class Student {
     private String dob;
     private int id;
     private String username;
+    private ArrayList<Module> assignedModules;
+    private CourseProgramme registeredCourse;
     
     public Student(String n, int a, String d, int i){
         this.name = n;
@@ -45,11 +50,24 @@ public class Student {
     public int getID(){
         return this.id;
     }
+    public ArrayList getModules(){
+        return this.assignedModules;
+    }
+    public CourseProgramme getCourseProgramme(){
+        return this.registeredCourse;
+    }
     
     // Implement JUnit test to test this method
     // Method creates the username and also acts as an accessor method.
     public String getUsername(){
         System.out.println("Username : " + this.name + this.age);
         return this.name + this.age;
+    }
+    
+    public void addModule(Module m){
+        this.assignedModules.add(m);
+    }
+    public void addCourseProgramme(CourseProgramme c){
+        this.registeredCourse = c;
     }
 }
