@@ -9,10 +9,9 @@ public class Module {
     private String id;
     private ArrayList<Student> students;
     
-    public Module(String n, String i, ArrayList s){
+    public Module(String n, String i){
         this.moduleName = n;
         this.id = i;
-        this.students = s;
     }
     
     // Accessor Methods
@@ -22,7 +21,7 @@ public class Module {
     public String getID(){
         return this.id;
     }
-    public List getStudents(){
+    public ArrayList getStudents(){
         return this.students;
     }
     
@@ -33,11 +32,20 @@ public class Module {
     public void setID(String i){
         this.id = i;
     }
-    public void setStudents(ArrayList s){
+    
+    // Adding a list of students
+    public void setStudents(ArrayList<Student> s){
         this.students = s;
+        
+        //Add this module as a module each student is registered in.
+        for(Student student : s){
+            student.addModule(this);
+        }
     }
     
+    // Adding an individual student
     public void addStudent(Student s){
         this.students.add(s);
+        s.addModule(this); // Adding itself to student's list of assigned modules
     }
 }
