@@ -48,5 +48,14 @@ public class CourseProgramme {
     
     public void addModule(Module m){
         this.modules.add(m);
+        
+        // Get the students in the new module
+        ArrayList<Student> students = m.getStudents();
+        
+        // Add this course programme as a course programme 
+        // for all students in the module.
+        for(Student student : students){
+            student.addCourseProgramme(this);
+        }
     }
 }
