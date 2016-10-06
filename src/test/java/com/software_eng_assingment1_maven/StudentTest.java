@@ -17,6 +17,4 @@ public class StudentTest extends TestCase {
         
         assertEquals(expected, actual); // Test if values are equal
     }
-    
-   
 }

@@ -12,6 +12,7 @@ public class Module {
     public Module(String n, String i){
         this.moduleName = n;
         this.id = i;
+        this.students = new ArrayList<Student>();
     }
     
     // Accessor Methods
@@ -33,7 +34,10 @@ public class Module {
         this.id = i;
     }
     
-    // Adding a list of students
+    /**
+     * Adding list of students to the module. Overrides the original list.
+     * @param s 
+     */
     public void setStudents(ArrayList<Student> s){
         this.students = s;
         
@@ -46,6 +50,5 @@ public class Module {
     // Adding an individual student
     public void addStudent(Student s){
         this.students.add(s);
-        s.addModule(this); // Adding itself to student's list of assigned modules
     }
 }

@@ -10,11 +10,14 @@ public class CourseProgramme {
     private ArrayList<Module> modules;
     private LocalDate start;
     private LocalDate end;
+    private ArrayList<Student> students;
     
     public CourseProgramme(String c, LocalDate s, LocalDate e){
         this.courseName = c;
         this.start = s;
         this.end = e;
+        this.modules = new ArrayList<Module>();
+        this.students = new ArrayList<Student>();
     }
     
     // Accessor Methods
@@ -30,25 +33,23 @@ public class CourseProgramme {
     public LocalDate getEnd(){
         return this.end;
     }
+    public ArrayList<Student> getStudents(){
+        return this.students;
+    }
     
     // Mutator Methods
     public void setCourseName(String c){
         this.courseName = c;
     }
-    
-    // Adding multiple modules
+    // Adding multiple modules, overrides original list
     public void setModules(ArrayList<Module> m){
         this.modules = m;
         
-        // Add this course programme as a course programme 
-        // for all students in the module.
         for(Module mod : m){
-            
-            // Get list of students in each module
-            ArrayList<Student> s = mod.getStudents();
-            for(Student student : s){
-                student.addCourseProgramme(this);
-            }   
+            for(Student s : this.students){
+                mod.addStudent(s);
+                s.addModule(mod);
+            }
         }
     }
     public void setStart(LocalDate s){
@@ -58,17 +59,37 @@ public class CourseProgramme {
         this.end = e;
     }
     
+    // Adding multiple students, overrides original list.
+    public void setStudents(ArrayList<Student> s){
+        this.students = s;
+        
+        for(Student student : s){
+            // Add this student to the Course Programme's modules
+            for(Module mod : this.modules){
+                mod.addStudent(student); 
+                student.addModule(mod);
+            }
+        }
+    }
+    
     // Adding an individual module
     public void addModule(Module m){
         this.modules.add(m);
         
-        // Get the students in the new module
-        ArrayList<Student> students = m.getStudents();
+        // Add the students in the course to the module's list of students
+        for(Student student : this.students){
+            m.addStudent(student);
+        }
+    }
+    
+    public void addStudent(Student s){
+        this.students.add(s);
+        s.addCourseProgramme(this);
         
-        // Add this course programme as a course programme 
-        // for all students in the module.
-        for(Student student : students){
-            student.addCourseProgramme(this);
+        // Add this student to the Course Programme's modules
+        for(Module mod : this.modules){
+            mod.addStudent(s); 
+            s.addModule(mod);
         }
     }
 }

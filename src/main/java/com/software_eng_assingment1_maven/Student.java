@@ -19,8 +19,8 @@ public class Student {
         this.age = a;
         this.dob = d;
         this.id = i;
-        
         this.username = getUsername();
+        this.assignedModules = new ArrayList<Module>();
     }
     
     // Mutator Methods
@@ -69,5 +69,13 @@ public class Student {
     }
     public void addCourseProgramme(CourseProgramme c){
         this.registeredCourse = c;
+    }
+    
+    public void printInfo(){
+        System.out.println("Course Programme : " + this.registeredCourse.getCourseName());
+        System.out.println("Assigned Modules: ");
+        for (Module mod : assignedModules){
+            System.out.println(mod.getModuleName());
+        }
     }
 }
