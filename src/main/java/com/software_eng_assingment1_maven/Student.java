@@ -72,10 +72,12 @@ public class Student {
     }
     
     public void printInfo(){
+        System.out.println("Student: " + this.name);
         System.out.println("Course Programme : " + this.registeredCourse.getCourseName());
         System.out.println("Assigned Modules: ");
         for (Module mod : assignedModules){
             System.out.println(mod.getModuleName());
         }
+        System.out.println("\n");
     }
 }
