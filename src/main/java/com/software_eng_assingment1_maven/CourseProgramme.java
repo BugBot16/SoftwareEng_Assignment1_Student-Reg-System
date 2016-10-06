@@ -11,9 +11,8 @@ public class CourseProgramme {
     private LocalDate start;
     private LocalDate end;
     
-    public CourseProgramme(String c, ArrayList m, LocalDate s, LocalDate e){
+    public CourseProgramme(String c, LocalDate s, LocalDate e){
         this.courseName = c;
-        this.modules = m;
         this.start = s;
         this.end = e;
     }
@@ -36,8 +35,21 @@ public class CourseProgramme {
     public void setCourseName(String c){
         this.courseName = c;
     }
-    public void setModules(ArrayList m){
+    
+    // Adding multiple modules
+    public void setModules(ArrayList<Module> m){
         this.modules = m;
+        
+        // Add this course programme as a course programme 
+        // for all students in the module.
+        for(Module mod : m){
+            
+            // Get list of students in each module
+            ArrayList<Student> s = mod.getStudents();
+            for(Student student : s){
+                student.addCourseProgramme(this);
+            }   
+        }
     }
     public void setStart(LocalDate s){
         this.start = s;
@@ -46,6 +58,7 @@ public class CourseProgramme {
         this.end = e;
     }
     
+    // Adding an individual module
     public void addModule(Module m){
         this.modules.add(m);
         
