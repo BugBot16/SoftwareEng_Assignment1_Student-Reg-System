@@ -1,5 +1,4 @@
 package com.software_eng_assingment1_maven;
-import com.software_eng_assingment1_maven.Student;
 import junit.framework.TestCase;
 
 /**
